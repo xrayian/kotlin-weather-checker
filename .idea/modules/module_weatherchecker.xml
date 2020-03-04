@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_weatherchecker" default="compile.module.weatherchecker">
+  <dirname property="module.weatherchecker.basedir" file="${ant.file.module_weatherchecker}"/>
+  
+  <property name="module.jdk.home.weatherchecker" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.weatherchecker" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.weatherchecker" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.weatherchecker" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="weatherchecker.output.dir" value="${module.weatherchecker.basedir}/../../out/production/weatherChecker"/>
+  <property name="weatherchecker.testoutput.dir" value="${module.weatherchecker.basedir}/../../out/test/weatherChecker"/>
+  
+  <path id="weatherchecker.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="weatherchecker.module.production.classpath">
+    <path refid="${module.jdk.classpath.weatherchecker}"/>
+  </path>
+  
+  <path id="weatherchecker.runtime.production.module.classpath">
+    <pathelement location="${weatherchecker.output.dir}"/>
+  </path>
+  
+  <path id="weatherchecker.module.classpath">
+    <path refid="${module.jdk.classpath.weatherchecker}"/>
+    <pathelement location="${weatherchecker.output.dir}"/>
+  </path>
+  
+  <path id="weatherchecker.runtime.module.classpath">
+    <pathelement location="${weatherchecker.testoutput.dir}"/>
+    <pathelement location="${weatherchecker.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.weatherchecker">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.weatherchecker">
+    <patternset refid="excluded.from.module.weatherchecker"/>
+  </patternset>
+  
+  
+  <target name="compile.module.weatherchecker" depends="compile.module.weatherchecker.production,compile.module.weatherchecker.tests" description="Compile module weatherChecker"/>
+  
+  <target name="compile.module.weatherchecker.production" depends="register.custom.compilers" description="Compile module weatherChecker; production classes"/>
+  
+  <target name="compile.module.weatherchecker.tests" depends="register.custom.compilers,compile.module.weatherchecker.production" description="compile module weatherChecker; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.weatherchecker" description="cleanup module">
+    <delete dir="${weatherchecker.output.dir}"/>
+    <delete dir="${weatherchecker.testoutput.dir}"/>
+  </target>
+</project>
