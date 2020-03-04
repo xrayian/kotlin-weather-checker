@@ -33,7 +33,7 @@ fun sendGet(city :String) {
                 }
             }
         }
-    } catch (e: UnknownHostException) {println("\nYou're Currently Offline\n")}
+    } catch (e: UnknownHostException) {println("\nError Connecting to the server\n")}
 
 
     if (!jsonData.isNullOrEmpty()){
